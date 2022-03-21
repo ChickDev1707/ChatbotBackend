@@ -1,0 +1,43 @@
+{"intents": [
+  {"tag": "greeting",
+   "patterns": ["Xin chào", "Bạn có khỏe không", "Có ai ở đó không?", "Chào", "Chúc một ngày tốt lành", "Rất vui được gặp bạn"],
+   "responses": ["Xin chào!", "Rất vui được gặp lại!", "Xin chào, tôi có thể giúp gì cho bạn?"],
+   "context_set": ""
+  },
+  {"tag": "goodbye",
+   "patterns": ["Tạm biệt", "Bye", "Gặp lại sau nhé", "Hẹn gặp lại", "Tôi phải đi đây", "Tôi đi", "Chúc một ngày tốt lành"],
+   "responses": ["Rất buồn khi thấy bạn ra đi :(", "Nói chuyện với bạn sau", "Tạm biệt!"],
+   "context_set": ""
+  },
+  {"tag": "age",
+   "patterns": ["Bao nhiêu tuổi", "Bao nhiêu tuổi rồi", "Bạn bao nhiêu tuổi", "Tuổi của bạn", "tuổi?"],
+   "responses": ["Tôi 18 tuổi!", "18 tuổi!"],
+   "context_set": ""
+  },
+  {"tag": "name",
+   "patterns": ["Tên bạn là gì", "Tôi nên gọi bạn là gì", "Tên gì"],
+   "responses": ["Bạn có thể gọi tôi là Tim.", "Tôi là Tim!", "Tôi là Tim hay còn gọi là Tech With Tim."],
+   "context_set": ""
+  },
+  {"tag": "shop",
+   "patterns": ["Tôi muốn mua thứ gì đó", "Có gì trên thực đơn", "Bạn giới thiệu món gì?", "Tôi muốn mua vài món"],
+   "responses": ["Chúng tôi bán bánh quy sô cô la chip với giá 2 đô la!", "Thực đơn có bánh quy!"],
+   "context_set": ""
+  },
+  {"tag": "hours",
+   "patterns": ["Bạn mở cửa khi nào", "Giờ làm việc của các bạn", "Giờ hoạt động"],
+   "responses": ["Chúng tôi mở cửa từ 7 giờ sáng đến 4 giờ chiều từ Thứ Hai đến Thứ Sáu!"],
+   "context_set": ""
+  },
+  {"tag": "indications_and_usage",
+    "patterns": ["Công dụng", "Công dụng thuốc", "Thuốc có công dụng như thế nào", "Tác dụng", "Dùng để trị"],
+    "api": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:DRUG_NAME&limit=1",
+    "context_set": ""
+  },
+  {"tag": "dosage_and_administration",
+    "patterns": ["Liều lượng", "Cách dùng", "Cách sử dụng", "Khi nào nên dùng thuốc", "Sử dụng như thế nào", "Dùng như thế nào", "Liều lượng bao nhiêu"],
+    "api": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:DRUG_NAME&limit=1",
+    "context_set": ""
+  }
+]
+}
