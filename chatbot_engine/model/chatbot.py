@@ -6,18 +6,20 @@ stemmer = LancasterStemmer()
 from tensorflow.keras.models import load_model
 import random
 import json
-import requests
 import re
 import numpy
 import pickle
 
-with open("../intents/vietnamese-intents.json") as file:
+from drug_search.searcher import get_drug_search_result
+from symptom_checker.checker import get_check_result
+
+with open("../intents/intents.json") as file:
   data = json.load(file)
 
-with open("data.pickle", "rb") as f:
+with open("./data.pickle", "rb") as f:
   words, labels = pickle.load(f)
 
-model = load_model('chatbot_model.h5')
+model = load_model('./chatbot_model.h5')
 
 # chatbot function
 
@@ -51,27 +53,26 @@ def chat():
 
     result = ""
     for intent in data["intents"]:
-      if intent['tag'] == tag:
-        if "responses" in intent:
+      if intent["tag"] == tag:
+        i_type = intent["type"]
+        if i_type == "saying":
           result = random.choice(intent['responses'])
+        elif i_type == "drug_search":
+          result = get_drug_search_result(inp, intent)
+        elif i_type == "symptom_checker":
+          result = get_check_result(inp, intent)
         else:
-          # api
-          drug_name = get_drug_name(inp)
-          result = get_drug_api_result(drug_name, intent)
+          print("unrecognized")
+      
+      # if intent['tag'] == tag:
+      #   if "responses" in intent:
+      #     result = random.choice(intent['responses'])
+      #   else:
+      #     # api
+      #     drug_name = get_drug_name(inp)
+      #     result = get_drug_api_result(drug_name, intent)
           
     print(result)
 
-def get_drug_name(sentence):
-  pattern = r'"([A-Za-z0-9_\./\\-]*)"'
-  m = re.search(pattern, sentence)
-  return m.group().replace('"', '')
-
-def get_drug_api_result(drug_name, intent):
-  complete_api = intent['api'].replace('DRUG_NAME', drug_name)
-  response = requests.get(complete_api)
-  drugInfo = response.json()
-  label = intent['tag']
-  result = drugInfo["results"][0][label][0]
-  return result
 
 chat()

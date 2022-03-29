@@ -1,0 +1,48 @@
+{"intents": [
+  {"tag": "greeting",
+   "patterns": ["Xin chào", "Bạn có khỏe không", "Có ai ở đó không?", "Chào", "Chúc một ngày tốt lành", "Rất vui được gặp bạn", "Chào bạn", "Hello", "Hi"],
+   "responses": ["Xin chào!", "Rất vui được gặp lại!", "Xin chào, tôi có thể giúp gì cho bạn?"],
+   "type": "saying"
+  },
+  {"tag": "goodbye",
+   "patterns": ["Tạm biệt", "Bye", "Gặp lại sau nhé", "Hẹn gặp lại", "Tôi phải đi đây", "Tôi đi", "Chúc một ngày tốt lành"],
+   "responses": ["Rất buồn khi thấy bạn ra đi :(", "Nói chuyện với bạn sau", "Tạm biệt!"],
+   "type": "saying"
+  },
+  {"tag": "name",
+   "patterns": ["Tên bạn là gì", "Tôi nên gọi bạn là gì", "Tên gì"],
+   "responses": ["Tôi là chatbot chăm sóc sức khỏe.", "Tôi là trợ lý chăm sóc sức khỏe của bạn!", "Bạn có thể gọi tôi là chatbot."],
+   "type": "saying"
+  },
+  {"tag": "uses",
+   "patterns": ["Bạn có thể làm gì cho tôi", "Bạn làm gì", "Bạn có thể giúp gì", "Công việc của bạn"],
+   "responses": ["Bạn có thể hỏi tôi các thông tin về y tế, sức khỏe", "Tôi có thể tư vấn sức khỏe và giúp bạn tra cứu thông tin"],
+   "type": "saying"
+  },
+  {"tag": "indications_and_usage",
+    "patterns": ["Công dụng", "Công dụng thuốc", "Thuốc có công dụng như thế nào", "Tác dụng", "Dùng để trị"],
+    "api": {
+      "url": "https://api.fda.gov/drug/label.json" 
+    },
+    "type": "drug_search"
+  },
+  {"tag": "dosage_and_administration",
+    "patterns": ["Liều lượng", "Cách dùng", "Cách sử dụng", "Khi nào nên dùng thuốc", "Sử dụng như thế nào", "Dùng như thế nào", "Liều lượng bao nhiêu"],
+    "api": {
+      "url": "https://api.fda.gov/drug/label.json"
+    },
+    "type": "drug_search"
+  },
+  {"tag": "symptom_checker",
+    "patterns": ["Triệu chứng", "Tôi có các triệu chứng", "Dấu hiệu", "Biểu hiện", "Các triệu chứng của tôi", "Tôi có các biểu hiền"],
+    "api": {
+      "url": "https://priaid-symptom-checker-v1.p.rapidapi.com/diagnosis",
+      "headers": {
+        "X-RapidAPI-Host": "priaid-symptom-checker-v1.p.rapidapi.com",
+	      "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "symptom_checker"
+  }
+]
+}

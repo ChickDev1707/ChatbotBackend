@@ -11,7 +11,7 @@ import random
 import pickle
 import json
 
-with open("../intents/vietnamese-intents.json") as file:
+with open("../intents/intents.json") as file:
   data = json.load(file)
 
 # prepare data
@@ -38,7 +38,7 @@ labels = sorted(set(labels))
 training = []
 out_empty = [0] * len(labels)
 # save data
-with open("data.pickle", "wb") as f:
+with open("./data.pickle", "wb") as f:
   pickle.dump((words, labels), f)
 
 for x, doc in enumerate(docs_x):
