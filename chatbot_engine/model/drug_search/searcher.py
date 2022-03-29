@@ -1,8 +1,12 @@
-
+import sys
 import requests
+from pathlib import Path
 from googletrans import Translator
 
-from utils.string import get_quote_content
+utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
+sys.path.append(utils_path)
+
+from sentence import get_quote_content
 
 def get_drug_search_result(sentence, intent):
   drug_name = get_quote_content(sentence)

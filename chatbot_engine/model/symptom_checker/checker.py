@@ -1,13 +1,18 @@
 
 import json
 import requests
+import sys
+import os
+
+from pathlib import Path
 from thefuzz import fuzz
 from googletrans import Translator
 
-import os
 dirname = os.path.dirname(__file__)
+utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
+sys.path.append(utils_path)
 
-from utils.string import get_quote_content
+from sentence import get_quote_content
 
 with open(os.path.join(dirname, 'symptoms.json')) as file:
   data = json.load(file)

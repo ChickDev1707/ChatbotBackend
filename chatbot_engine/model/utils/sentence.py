@@ -1,0 +1,27 @@
+
+import re
+import nltk
+import numpy
+from nltk.stem.lancaster import LancasterStemmer
+stemmer = LancasterStemmer()
+
+def get_quote_content(sentence):
+  pattern = r'"(.*)"'
+  m = re.search(pattern, sentence)
+  return m.group().replace('"', '')
+
+
+def clean_up_sentence(sentence):
+  s_words = nltk.word_tokenize(sentence)
+  s_words = [stemmer.stem(word.lower()) for word in s_words]
+  return s_words
+
+def bag_of_words(words, sentence):
+  s_words = clean_up_sentence(sentence)
+  bag = [0] * len(words)
+  for se in s_words:
+    for i, w in enumerate(words):
+      if w == se:
+        bag[i] = 1
+          
+  return numpy.array(bag)
