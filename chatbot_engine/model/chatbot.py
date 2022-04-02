@@ -12,6 +12,7 @@ import pickle
 
 from drug_search.searcher import get_drug_search_result
 from symptom_checker.checker import get_check_result
+from ingredient_search.searcher import get_ingredient_info
 
 with open("../intents/intents.json") as file:
   data = json.load(file)
@@ -61,6 +62,8 @@ def chat():
           result = get_drug_search_result(inp, intent)
         elif i_type == "symptom_checker":
           result = get_check_result(inp, intent)
+        elif i_type == "ingredient_info":
+          result = get_ingredient_info(inp, intent)
         else:
           print("unrecognized")
       

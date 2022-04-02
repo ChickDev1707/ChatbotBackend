@@ -5,14 +5,13 @@ import sys
 import os
 
 from pathlib import Path
-from thefuzz import fuzz
 from googletrans import Translator
 
 dirname = os.path.dirname(__file__)
 utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 
-from sentence import get_quote_content
+from string_util import get_quote_content, get_best_match_item_ID
 
 with open(os.path.join(dirname, 'symptoms.json')) as file:
   data = json.load(file)
@@ -52,30 +51,17 @@ def get_translated_issue(item):
 
 def get_query_string(sentence):
   symptom_string = get_quote_content(sentence)
-  ids = getMatchedSymptomsInputID(symptom_string)
+  ids = get_match_symptom_input_ID(symptom_string)
   ids = json.dumps(ids)
   return {"gender":"male","year_of_birth":"1984","symptoms": ids,"language":"en-gb"}
 
 
-def getMatchedSymptomsInputID(inp):
+def get_match_symptom_input_ID(inp):
   inp_symptoms = inp.split(',')
   result = []
   for symptom in inp_symptoms:
-    match = getMatchedSymptomsID(symptom)
-    result.extend(match)
+    match = get_best_match_item_ID(symptom, data["symptoms"])
+    if match!= None:
+      result.append(match)
   return result
 
-def getMatchedSymptomsID(inp):
-  matches = []
-  for symptom in data["symptoms"]:
-    if isStringMatch(inp, symptom["Name"]):
-      matches.append(symptom["ID"])
-  return matches
-
-def isStringMatch(inp, target):
-  MATCH_RATIO = 90
-  ratio = fuzz.token_sort_ratio(inp.lower(), target.lower())
-  if ratio > MATCH_RATIO:
-    return True
-  else:
-    return False

@@ -6,7 +6,7 @@ from googletrans import Translator
 utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 
-from sentence import get_quote_content
+from string_util import get_quote_content
 
 def get_drug_search_result(sentence, intent):
   drug_name = get_quote_content(sentence)

@@ -2,6 +2,7 @@
 import re
 import nltk
 import numpy
+from thefuzz import fuzz
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 
@@ -10,6 +11,21 @@ def get_quote_content(sentence):
   m = re.search(pattern, sentence)
   return m.group().replace('"', '')
 
+def get_best_match_item_ID(inp, items):
+  MATCH_RATIO = 90
+  match = None
+  maxRatio = 0
+  for item in items:
+    ratio = fuzz.token_sort_ratio(inp.lower(), item["Name"].lower())
+    if ratio> maxRatio:
+      maxRatio = ratio
+      match = item["ID"]
+  if maxRatio> MATCH_RATIO:
+    return match
+  else:
+    return None
+
+# sentence
 
 def clean_up_sentence(sentence):
   s_words = nltk.word_tokenize(sentence)
