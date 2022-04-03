@@ -34,7 +34,7 @@
     "type": "drug_search"
   },
   {"tag": "symptom_checker",
-    "patterns": ["Triệu chứng", "Tôi có các triệu chứng", "Dấu hiệu", "Biểu hiện", "Các triệu chứng của tôi", "Tôi có các biểu hiền"],
+    "patterns": ["Triệu chứng", "Tôi có các triệu chứng", "Dấu hiệu", "Biểu hiện", "Các triệu chứng của tôi", "Tôi có các biểu hiện"],
     "api": {
       "url": "https://priaid-symptom-checker-v1.p.rapidapi.com/diagnosis",
       "headers": {
@@ -43,6 +43,80 @@
       }
     },
     "type": "symptom_checker"
+  },
+  {"tag": "ingredient_info",
+    "patterns": ["Thành phần", "Thực phẩm", "Nguyên liệu", "Thông tin thực phẩm", "Thông tin nguyên liệu", "Dinh dưỡng có trong thành phần", "Dinh dưỡng có trong thực phẩm", "Giá trị dinh dưỡng của"],
+    "api": {
+      "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/FOOD_ID/information",
+      "headers":  {
+        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "ingredient_info"
+  },
+  {"tag": "location_search",
+    "patterns": ["Vị trí của bệnh viện", "Bệnh viện", "Trạm y tế", "Vị trí của trạm y tế", "Bệnh viện nằm ở đâu", "Trạm y tế nằm ở đâu", "Địa điểm bệnh viện"],
+    "api": {
+      "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json",
+      "key": "AIzaSyDtSAX6ahIjvygeWtiGDjejLOIOu0Gis44"
+    },
+    "type": "location_search"
+  },
+  {"tag": "issue_info",
+    "patterns": ["Thông tin về bệnh", "Bệnh là gì", "Vấn đề sức khỏe", "Thông tin về vấn đề sức khỏe"],
+    "api": {
+      "url": "https://priaid-symptom-checker-v1.p.rapidapi.com/issues/ISSUE_ID/info",
+      "headers": {
+        "X-RapidAPI-Host": "priaid-symptom-checker-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "issue_info"
+  },
+  {"tag": "covid_info",
+    "patterns": ["Covid-19", "Covid19", "Covid", "Corona", "Virus covid-19", "Thông tin về covid-19"],
+    "api": {
+      "url": "https://covid-news-and-statistics.p.rapidapi.com/country/vietnam",
+      "headers": {
+        "X-RapidAPI-Host": "covid-news-and-statistics.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "covid_info"
+  },
+  {"tag": "health_news",
+    "patterns": ["Tin tức y tế", "Tin tức sức khỏe", "Tin tức", "Bản tin y tế", "Bản tin sức khỏe", "Tin y tế"],
+    "api": {
+      "url": "https://current-news.p.rapidapi.com/news/health",
+      "headers": {
+        "X-RapidAPI-Host": "current-news.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "health_news"
+  },
+  {"tag": "meal_plan",
+    "patterns": ["Tạo kế hoạch ăn uống trong ngày", "Kế hoạch ăn muốn", "Lên kế hoạch ăn uống", "Các bữa ăn với lượng calo", "Tạo kế hoạch ăn uống với lượng calo"],
+    "api": {
+      "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate",
+      "headers": {
+        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "meal_plan"
+  },
+  {"tag": "random_recipe",
+    "patterns": ["Công thức nấu ăn ngẫu nhiên", "Tạo công thức nấu ăn ngẫu nhiên", "Công thức ngẫu nhiên", "Công thức bất kỳ"],
+    "api": {
+      "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random",
+      "headers": {
+        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "2ebedc782bmsh7738b7aa46dc378p17fe5cjsn579c4be50f46"
+      }
+    },
+    "type": "random_recipe"
   }
 ]
 }

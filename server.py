@@ -10,7 +10,7 @@ import pickle
 # feature module
 from chatbot_engine.model.drug_search.searcher import get_drug_search_result
 from chatbot_engine.model.symptom_checker.checker import get_check_result
-from chatbot_engine.model.utils.sentence import bag_of_words
+from chatbot_engine.model.utils.string_util import bag_of_words
 
 app = Flask(__name__)
 CORS(app)
