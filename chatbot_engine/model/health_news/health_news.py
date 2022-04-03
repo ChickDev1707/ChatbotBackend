@@ -29,8 +29,8 @@ def get_translated_news(news):
   translations = translator.translate(news_data, src="en", dest="vi")
 
   result = {
-    "Title": translations[0].text,
-    "Description": translations[1].text,
-    "Url": news["url"]
+    "title": translations[0].text,
+    "description": translations[1].text,
+    "url": news["url"]
   }
   return result

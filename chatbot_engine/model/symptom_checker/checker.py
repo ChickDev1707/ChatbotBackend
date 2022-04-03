@@ -43,9 +43,9 @@ def get_translated_issue(item):
   translations = translator.translate(issue_data, src="en", dest="vi")
 
   result = {
-    "Name": translations[0].text,
-    "Arrcuracy": translations[1].text,
-    "IcdName": translations[2].text
+    "name": translations[0].text,
+    "arrcuracy": translations[1].text,
+    "icdName": translations[2].text
   }
   return result
 

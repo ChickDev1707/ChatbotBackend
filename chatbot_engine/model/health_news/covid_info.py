@@ -7,10 +7,10 @@ def get_covid_info(intent):
   result = response.json()[0]
 
   result = {
-    "last_updated_date": result["last_updated_date"],
-    "total_cases": result["total_cases"],
-    "new_cases": result["new_cases"],
-    "total_deaths": result["total_deaths"],
-    "new_deaths": result["new_deaths"]
+    "lastUpdatedDate": result["last_updated_date"],
+    "totalCases": result["total_cases"],
+    "newCases": result["new_cases"],
+    "totalDeaths": result["total_deaths"],
+    "newDeaths": result["new_deaths"]
   }
   return result

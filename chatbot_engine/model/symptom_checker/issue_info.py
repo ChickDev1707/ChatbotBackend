@@ -40,11 +40,11 @@ def get_translation_result(issue):
   translations = translator.translate(issue_data, src="en", dest="vi")
 
   result = {
-    "Name": translations[0].text,
-    "DescriptionShort": translations[1].text,
-    "MedicalCondition": translations[2].text,
-    "PossibleSymptoms": translations[3].text,
-    "TreatmentDescription": translations[4].text,
+    "name": translations[0].text,
+    "descriptionShort": translations[1].text,
+    "medicalCondition": translations[2].text,
+    "possibleSymptoms": translations[3].text,
+    "treatmentDescription": translations[4].text,
   }
   return result
 

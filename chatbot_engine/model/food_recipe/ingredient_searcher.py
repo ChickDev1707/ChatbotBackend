@@ -13,7 +13,7 @@ sys.path.append(utils_path)
 
 from string_util import get_quote_content, get_best_match_item_ID
 
-with open(os.path.join(dirname, 'vi-ingredients.json')) as file:
+with open(os.path.join(dirname, 'ingredients.json')) as file:
   data = json.load(file)
 
 def get_ingredient_info(sentence, intent):
