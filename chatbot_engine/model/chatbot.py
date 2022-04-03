@@ -12,7 +12,11 @@ import pickle
 
 from drug_search.searcher import get_drug_search_result
 from symptom_checker.checker import get_check_result
+from symptom_checker.issue_info import get_issue_info
 from ingredient_search.searcher import get_ingredient_info
+from location_search.searcher import get_location_search_result
+from health_news.covid_info import get_covid_info
+from health_news.health_news import get_health_news
 
 with open("../intents/intents.json") as file:
   data = json.load(file)
@@ -64,6 +68,14 @@ def chat():
           result = get_check_result(inp, intent)
         elif i_type == "ingredient_info":
           result = get_ingredient_info(inp, intent)
+        elif i_type == "location_search":
+          result = get_location_search_result(inp, intent)
+        elif i_type == "issue_info":
+          result = get_issue_info(inp, intent)
+        elif i_type == "covid_info":
+          result = get_covid_info(intent)
+        elif i_type == "health_news":
+          result = get_health_news(intent)
         else:
           print("unrecognized")
       

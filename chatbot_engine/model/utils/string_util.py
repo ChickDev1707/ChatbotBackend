@@ -12,7 +12,7 @@ def get_quote_content(sentence):
   return m.group().replace('"', '')
 
 def get_best_match_item_ID(inp, items):
-  MATCH_RATIO = 90
+  MATCH_RATIO = 70
   match = None
   maxRatio = 0
   for item in items:
