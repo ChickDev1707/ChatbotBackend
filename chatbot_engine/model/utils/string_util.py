@@ -7,9 +7,12 @@ from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 
 def get_quote_content(sentence):
-  pattern = r'"(.*)"'
-  m = re.search(pattern, sentence)
-  return m.group().replace('"', '')
+	try:
+		pattern = r'"(.*)"'
+		m = re.search(pattern, sentence)
+		return m.group().replace('"', '')
+	except:
+		raise Exception('Không xác định được từ khóa tìm kiếm, hãy nhập từ khóa tìm kiếm trong cặp ngoặc kép ""')
 
 def get_best_match_item_ID(inp, items):
   MATCH_RATIO = 70

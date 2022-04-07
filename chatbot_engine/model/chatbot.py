@@ -50,6 +50,57 @@ def bag_of_words(sentence):
           
   return numpy.array(bag)
 
+def get_result(inp):
+  ACCEPT_RATIO = 0.9
+  bow = bag_of_words(inp)
+  results = model.predict(numpy.array([bow]))[0]
+  results_index = numpy.argmax(results)
+  tag = labels[results_index]
+  
+  result = None
+  if results[results_index] > ACCEPT_RATIO:
+    result = get_output(inp, tag)
+  else:
+    result = {
+      "status": "FAILED",
+      "message": "Tôi không hiểu yêu cầu của bạn, xin nhập lại một yêu cầu khác!"
+    }
+  return result
+
+def get_output(inp, tag):
+  output = ""
+  intent = get_matched_intent(tag)
+  i_type = intent["type"]
+  if i_type != None:
+    if i_type == "saying":
+      output = random.choice(intent['responses'])
+    elif i_type == "drug_search":
+      output = get_drug_search_result(inp, intent)
+    elif i_type == "symptom_checker":
+      output = get_check_result(inp, intent)
+    elif i_type == "ingredient_info":
+      output = get_ingredient_info(inp, intent)
+    elif i_type == "location_search":
+      output = get_location_search_result(inp, intent)
+    elif i_type == "issue_info":
+      output = get_issue_info(inp, intent)
+    elif i_type == "covid_info":
+      output = get_covid_info(intent)
+    elif i_type == "health_news":
+      output = get_health_news(intent)
+    elif i_type == "meal_plan":
+      output = get_meal_plan(inp, intent)
+    elif i_type == "random_recipe":
+      output = get_random_recipe(intent)
+  else:
+    output = "Không xác định"
+  return output
+
+def get_matched_intent(tag):
+  for intent in data["intents"]:
+    if intent["tag"] == tag:
+      return intent
+  return None
 
 def chat():
   print("Start talking with the bot (type quit to stop)!")
@@ -57,47 +108,8 @@ def chat():
     inp = input("You: ")
     if inp.lower() == "quit":
       break
-    
-    bow = bag_of_words(inp)
-    results = model.predict(numpy.array([bow]))[0]
-    results_index = numpy.argmax(results)
-    tag = labels[results_index]
-
-    result = ""
-    for intent in data["intents"]:
-      if intent["tag"] == tag:
-        i_type = intent["type"]
-        if i_type == "saying":
-          result = random.choice(intent['responses'])
-        elif i_type == "drug_search":
-          result = get_drug_search_result(inp, intent)
-        elif i_type == "symptom_checker":
-          result = get_check_result(inp, intent)
-        elif i_type == "ingredient_info":
-          result = get_ingredient_info(inp, intent)
-        elif i_type == "location_search":
-          result = get_location_search_result(inp, intent)
-        elif i_type == "issue_info":
-          result = get_issue_info(inp, intent)
-        elif i_type == "covid_info":
-          result = get_covid_info(intent)
-        elif i_type == "health_news":
-          result = get_health_news(intent)
-        elif i_type == "meal_plan":
-          result = get_meal_plan(inp, intent)
-        elif i_type == "random_recipe":
-          result = get_random_recipe(intent)
-        else:
-          print("unrecognized")
-      
-      # if intent['tag'] == tag:
-      #   if "responses" in intent:
-      #     result = random.choice(intent['responses'])
-      #   else:
-      #     # api
-      #     drug_name = get_drug_name(inp)
-      #     result = get_drug_api_result(drug_name, intent)
-          
+  
+    result = get_result(inp)
     print(result)
 
 
