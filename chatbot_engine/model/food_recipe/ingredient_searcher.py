@@ -12,9 +12,17 @@ utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 
 from string_util import get_quote_content, get_best_match_item_ID
+from io_util import get_response_with_exception, get_success_response, get_fail_response
 
 with open(os.path.join(dirname, 'ingredients.json')) as file:
   data = json.load(file)
+
+def get_ingredient_info_result(sentence, intent):
+  try:
+    result = get_ingredient_info(sentence, intent)
+    return get_success_response(tag= intent["tag"], data= result)
+  except Exception as e:
+    return get_fail_response(str(e)) 
 
 def get_ingredient_info(sentence, intent):
   url = intent["api"]["url"]
@@ -23,19 +31,15 @@ def get_ingredient_info(sentence, intent):
 
   food_name = get_quote_content(sentence)
   food_id = get_best_match_item_ID(food_name, data["Ingredients"])
+  if food_id == None:
+    raise Exception("Không thể tìm thông tin về thành phần này")
+
   url = url.replace("FOOD_ID", str(food_id))
-  response = requests.request("GET", url, headers=headers, params=query_string)
-  result = response.json()
+  response = get_response_with_exception(url, params= query_string, headers= headers)
 
-  return get_nutrients_data(food_name, result)
+  ingredient = response.json()
+  return {
+    "name": food_name,
+    "nutrition": ingredient["nutrition"]
+  }
 
-
-def get_nutrients_data(food_name, ingredient):
-  nutrients = ingredient["nutrition"]["nutrients"]
-  # NO_NUTRIENT_OUTPUT = len(nutrients) if len(nutrients) < 5 else 5
-  result = "Thành phần dinh dưỡng có trong 100 gram " + food_name + "\n"
-  for nutrient in nutrients:
-    formater = "{name}: {amount:.2f}{unit}"
-    str_nutrient = formater.format(name=nutrient["name"], amount=nutrient["amount"], unit=nutrient["unit"])
-    result = result + str_nutrient + "\n"
-  return result

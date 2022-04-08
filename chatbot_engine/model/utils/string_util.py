@@ -10,7 +10,7 @@ def get_quote_content(sentence):
 	try:
 		pattern = r'"(.*)"'
 		m = re.search(pattern, sentence)
-		return m.group().replace('"', '')
+		return m.group().replace('"', '').lower()
 	except:
 		raise Exception('Không xác định được từ khóa tìm kiếm, hãy nhập từ khóa tìm kiếm trong cặp ngoặc kép ""')
 

@@ -12,15 +12,23 @@ utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 
 from string_util import get_quote_content, get_best_match_item_ID
+from io_util import get_response_with_exception, get_success_response, get_fail_response
 
 with open(os.path.join(dirname, 'symptoms.json')) as file:
   data = json.load(file)
 
-def get_check_result(sentence, intent):
+def get_symptom_check_result(sentence, intent):
+  try:
+    symptom_check = get_symptom_check(sentence, intent)
+    return get_success_response(sentence, intent)
+  except Exception as e:
+    return get_fail_response(str(e))
+
+def get_symptom_check(sentence, intent):
   query_string = get_query_string(sentence)
   url = intent["api"]["url"]
   headers = intent["api"]["headers"]
-  response = requests.request("GET", url, headers=headers, params=query_string)
+  response = get_response_with_exception("GET", url, headers=headers, params=query_string)
   result = response.json()
   return get_translation_result(result)
 
@@ -63,5 +71,8 @@ def get_match_symptom_input_ID(inp):
     match = get_best_match_item_ID(symptom, data["symptoms"])
     if match!= None:
       result.append(match)
-  return result
+  if len(result) == 0:
+    raise Exception("Không xác định được các triệu chứng")
+  else:
+    return result
 

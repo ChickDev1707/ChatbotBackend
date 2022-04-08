@@ -12,14 +12,14 @@ import pickle
 import os
 
 from drug_search.searcher import get_drug_search_result
-from symptom_checker.checker import get_check_result
-from symptom_checker.issue_info import get_issue_info
-from food_recipe.ingredient_searcher import get_ingredient_info
-from food_recipe.meal_plan import get_meal_plan
-from food_recipe.random_recipe import get_random_recipe
+from symptom_checker.checker import get_symptom_check_result
+from symptom_checker.issue_info import get_issue_info_result
+from food_recipe.ingredient_searcher import get_ingredient_info_result
+from food_recipe.meal_plan import get_meal_plan_result
+from food_recipe.random_recipe import get_random_recipe_result
 from location_search.searcher import get_location_search_result
-from health_news.covid_info import get_covid_info
-from health_news.health_news import get_health_news
+from health_news.covid_info import get_covid_info_result
+from health_news.health_news import get_health_news_result
 
 from pathlib import Path
 dirname = os.path.dirname(__file__)
@@ -77,21 +77,21 @@ def get_output(inp, tag):
     elif i_type == "drug_search":
       output = get_drug_search_result(inp, intent)
     elif i_type == "symptom_checker":
-      output = get_check_result(inp, intent)
+      output = get_symptom_check_result(inp, intent)
     elif i_type == "ingredient_info":
-      output = get_ingredient_info(inp, intent)
+      output = get_ingredient_info_result(inp, intent)
     elif i_type == "location_search":
       output = get_location_search_result(inp, intent)
     elif i_type == "issue_info":
-      output = get_issue_info(inp, intent)
+      output = get_issue_info_result(inp, intent)
     elif i_type == "covid_info":
-      output = get_covid_info(intent)
+      output = get_covid_info_result(intent)
     elif i_type == "health_news":
-      output = get_health_news(intent)
+      output = get_health_news_result(intent)
     elif i_type == "meal_plan":
-      output = get_meal_plan(inp, intent)
+      output = get_meal_plan_result(inp, intent)
     elif i_type == "random_recipe":
-      output = get_random_recipe(intent)
+      output = get_random_recipe_result(intent)
   else:
     output = "Không xác định"
   return output
@@ -111,6 +111,5 @@ def chat():
   
     result = get_result(inp)
     print(result)
-
 
 chat()

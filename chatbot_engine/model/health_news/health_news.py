@@ -1,10 +1,23 @@
-import requests
 from googletrans import Translator
+import sys
+from pathlib import Path
+
+utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
+sys.path.append(utils_path)
+
+from io_util import get_response_with_exception, get_success_response, get_fail_response
+
+def get_health_news_result(intent):
+  try:
+    health_news = get_health_news(intent)
+    return get_success_response(tag= intent["tag"], data= health_news)
+  except Exception as e:
+    return get_fail_response(str(e))
 
 def get_health_news(intent):
   url = intent["api"]["url"]
   headers = intent["api"]["headers"]
-  response = requests.request("GET", url=url, headers=headers)
+  response = get_response_with_exception(url, headers= headers)
   result = response.json()
   result ={
     "news": get_translation_result(result["news"])

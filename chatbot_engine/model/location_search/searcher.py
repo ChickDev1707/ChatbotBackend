@@ -6,13 +6,21 @@ utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 
 from string_util import get_quote_content
+from io_util import get_response_with_exception, get_success_response, get_fail_response
 
 def get_location_search_result(sentence, intent):
+  try:
+    location = get_location(sentence, intent)
+    return get_success_response(tag= intent["tag"], data= location)
+  except Exception as e:
+    return get_fail_response(str(e))
+
+def get_location(sentence, intent):
   location_name = get_quote_content(sentence)
   url = intent["api"]["url"]
   key = intent["api"]["key"]
   query_string = get_query_string(location_name, key)
-  response = requests.request("GET", url, params=query_string)
+  response = get_response_with_exception(url, params= query_string)
   return response.json()
 
 def get_query_string(location_name, key):
