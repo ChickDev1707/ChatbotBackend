@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 from googletrans import Translator
 
-
 utils_path = str(Path(__file__).parent.parent.absolute().joinpath('utils'))
 sys.path.append(utils_path)
 

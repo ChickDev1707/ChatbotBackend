@@ -14,7 +14,7 @@ from io_util import get_response_with_exception, get_success_response, get_fail_
 def get_meal_plan_result(sentence, intent):
   try:
     meal_plan = get_meal_plan(sentence, intent)
-    get_success_response(tag= intent["tag"], data= meal_plan)
+    return get_success_response(tag= intent["tag"], data= meal_plan)
   except Exception as e:
     return get_fail_response(str(e))
 
@@ -23,7 +23,7 @@ def get_meal_plan(sentence, intent):
   headers = intent["api"]["headers"]
   query_string = get_query_string(sentence)
 
-  response = get_response_with_exception(url= url, params= query_string, headers = headers)
+  response = get_response_with_exception(url, params= query_string, headers = headers)
   result = response.json()
 
   return get_translation_result(result)

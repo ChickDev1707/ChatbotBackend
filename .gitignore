@@ -1,7 +1,11 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
+*$py.
+
+/testing
+*.vscode
+# testing folder
 
 # C extensions
 *.so

@@ -16,10 +16,9 @@ def get_location_search_result(sentence, intent):
     return get_fail_response(str(e))
 
 def get_location(sentence, intent):
-  location_name = get_quote_content(sentence)
   url = intent["api"]["url"]
   key = intent["api"]["key"]
-  query_string = get_query_string(location_name, key)
+  query_string = get_query_string(sentence, key)
   response = get_response_with_exception(url, params= query_string)
   return response.json()
 

@@ -32,7 +32,7 @@ def get_issue_info(sentence, intent):
   issue_ID = get_issue_ID(sentence, data["Issues"])
   url = url.replace("ISSUE_ID", str(issue_ID))
 
-  response = get_response_with_exception("GET", url, headers=headers, params=query_string)
+  response = get_response_with_exception(url, headers=headers, params=query_string)
   result = response.json()
   return get_translation_result(result)
 

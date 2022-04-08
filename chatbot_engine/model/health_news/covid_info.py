@@ -16,7 +16,7 @@ def get_covid_info_result(intent):
 def get_covid_info(intent):
   url = intent["api"]["url"]
   headers = intent["api"]["headers"]
-  get_response_with_exception(url, headers= headers)
+  response = get_response_with_exception(url, headers= headers)
   result = response.json()[0]
 
   result = {

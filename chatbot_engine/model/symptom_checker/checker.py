@@ -20,7 +20,7 @@ with open(os.path.join(dirname, 'symptoms.json')) as file:
 def get_symptom_check_result(sentence, intent):
   try:
     symptom_check = get_symptom_check(sentence, intent)
-    return get_success_response(sentence, intent)
+    return get_success_response(tag= intent["tag"], data= symptom_check)
   except Exception as e:
     return get_fail_response(str(e))
 
@@ -28,7 +28,7 @@ def get_symptom_check(sentence, intent):
   query_string = get_query_string(sentence)
   url = intent["api"]["url"]
   headers = intent["api"]["headers"]
-  response = get_response_with_exception("GET", url, headers=headers, params=query_string)
+  response = get_response_with_exception(url, params= query_string, headers= headers)
   result = response.json()
   return get_translation_result(result)
 
