@@ -34,9 +34,9 @@ def get_symptom_check(sentence, intent):
 
 def get_translation_result(result):
   translated_result = []
-  NO_SYMPTOM = 3
+  NO_ISSUE = 3 if len(result) >= 3 else len(result)
   i = 0;
-  while i< NO_SYMPTOM:
+  while i< NO_ISSUE:
     item = result[i]
     translated_issue = get_translated_issue(item)
     translated_result.append(translated_issue)
@@ -52,7 +52,7 @@ def get_translated_issue(item):
 
   result = {
     "name": translations[0].text,
-    "arrcuracy": translations[1].text,
+    "accuracy": translations[1].text,
     "icdName": translations[2].text
   }
   return result
@@ -61,7 +61,7 @@ def get_query_string(sentence):
   symptom_string = get_quote_content(sentence)
   ids = get_match_symptom_input_ID(symptom_string)
   ids = json.dumps(ids)
-  return {"gender":"male","year_of_birth":"1984","symptoms": ids,"language":"en-gb"}
+  return {"gender":"male", "year_of_birth":"1900", "symptoms": ids,"language":"en-gb"}
 
 
 def get_match_symptom_input_ID(inp):

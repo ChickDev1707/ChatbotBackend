@@ -58,7 +58,7 @@
     "type": "meal_plan"
   },
   {"tag": "random_recipe",
-    "patterns": ["Công thức nấu ăn ngẫu nhiên", "Tạo công thức nấu ăn ngẫu nhiên", "Công thức ngẫu nhiên", "Công thức bất kỳ"],
+    "patterns": ["Công thức nấu ăn ngẫu nhiên", "Tạo công thức nấu ăn", "Công thức ngẫu nhiên", "Công thức bất kỳ", "Công thức random", "Radom công thức nấu ăn", "Tạo một công thức"],
     "api": {
       "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random",
       "headers": {
@@ -77,7 +77,7 @@
     "type": "location_search"
   },
   {"tag": "covid_info",
-    "patterns": ["Covid-19", "Covid19", "Covid", "Corona", "Virus covid-19", "Thông tin về covid-19"],
+    "patterns": ["Covid-19", "Covid19", "Covid", "Corona", "Virus covid-19", "Thông tin về covid-19", "Thống kê covid-19", "Cập nhật thông tin covid-19", "Tình hình dịch bệnh covid-19"],
     "api": {
       "url": "https://covid-news-and-statistics.p.rapidapi.com/country/vietnam",
       "headers": {
@@ -88,7 +88,7 @@
     "type": "covid_info"
   },
   {"tag": "health_news",
-    "patterns": ["Tin tức y tế", "Tin tức sức khỏe", "Tin tức", "Bản tin y tế", "Bản tin sức khỏe", "Tin y tế"],
+    "patterns": ["Tin tức y tế", "Tin tức sức khỏe", "Tin tức", "Bản tin y tế", "Bản tin sức khỏe", "Thời sự y tế"],
     "api": {
       "url": "https://current-news.p.rapidapi.com/news/health",
       "headers": {
@@ -109,12 +109,12 @@
     "type": "saying"
    },
    {"tag": "name",
-    "patterns": ["Tên bạn là gì", "Tôi nên gọi bạn là gì", "Tên gì"],
-    "responses": ["Tôi là chatbot chăm sóc sức khỏe.", "Tôi là trợ lý chăm sóc sức khỏe của bạn!", "Bạn có thể gọi tôi là chatbot."],
+    "patterns": ["Tên bạn là gì", "Tôi nên gọi bạn là gì", "Tên gì", "Bạn là ai", "Bạn là gì"],
+    "responses": ["Tôi là chatbot chăm sóc sức khỏe.", "Tôi là trợ lý chăm sóc sức khỏe của bạn!", "Bạn có thể gọi tôi là HealthBot."],
     "type": "saying"
    },
    {"tag": "uses",
-    "patterns": ["Bạn có thể làm gì cho tôi", "Bạn làm gì", "Bạn có thể giúp gì", "Công việc của bạn"],
+    "patterns": ["Bạn có thể làm gì cho tôi", "Bạn làm gì", "Bạn có thể giúp gì", "Công việc của bạn", "Công dụng của bạn"],
     "responses": ["Bạn có thể hỏi tôi các thông tin về y tế, sức khỏe", "Tôi có thể tư vấn sức khỏe và giúp bạn tra cứu thông tin"],
     "type": "saying"
    }

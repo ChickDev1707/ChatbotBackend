@@ -17,7 +17,6 @@ def index():
 def chatbot(): 
   sentence = request.form["sentence"]
   result = get_result(sentence)
-  print(result)
   return json.dumps(result, ensure_ascii=False).encode("utf8")
    
 if __name__ == '__main__':
